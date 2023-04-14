@@ -1,40 +1,49 @@
 <template>
   <main>
-    <header class="header">
-    <img src="./assets/logo.svg" alt="logo" class="header-logo">
-    <h1>My favorite films</h1>
-  </header>
-  
-  <div class="movies">
-    <h3>All movies</h3>
-    <movie v-for="movie in movies" :key="movie.id" :movie="movie"></movie>
-  </div>
+    <header-component />
+    
+    <div class="tabs">
+      <v-btn 
+        class="btn" 
+        @click="store.switchTab(btn.tab)" 
+        v-for="btn in tabMenuButtons" 
+        :key="btn.name"
+        :class="{btn_green: activeTab === btn.tab}">{{ btn.name }}</v-btn>
+    </div>
+    
+    <KeepAlive>
+      <component :is="computedComponent" />
+    </KeepAlive>
+    
   </main>
-
+  
 </template>
 
 <script setup>
-  import Movie from './components/Movie.vue';
-  import { useMovieStore } from './stores/movieStore';
-  import { storeToRefs } from 'pinia';
+import HeaderComponent from './components/HeaderComponent.vue'
+import MoviesRender from './components/MoviesRender.vue';
+import Search from './components/Search.vue';
+import { useMovieStore } from './stores/movieStore';
+import { computed } from '@vue/reactivity';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
 
-  const store = useMovieStore();
-  const {movies} = storeToRefs(store);
+
+const store = useMovieStore();
+const { activeTab } = storeToRefs(store);
+
+const computedComponent = computed(() => {
+  return activeTab.value === 1 ? MoviesRender : Search;  
+});
+
+const tabMenuButtons = ref([{tab: 1, name: 'Favorite'}, {tab: 2, name: 'Search'}]);
+
 
 </script>
 
 
 <style scoped>
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-.header-logo {
-  max-width: 50px;
-  margin-right: 10px;
-}
+
 .btn {
   border: none;
   width: 100px;
@@ -44,6 +53,7 @@
   border-radius: 10px;
   cursor: pointer;
   background: #efefef;
+  transition: linear .3s;
 }
 .btn:hover {
   opacity: 0.7;
