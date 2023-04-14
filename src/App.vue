@@ -1,5 +1,6 @@
 <template>
-  <header class="header">
+  <main>
+    <header class="header">
     <img src="./assets/logo.svg" alt="logo" class="header-logo">
     <h1>My favorite films</h1>
   </header>
@@ -8,6 +9,8 @@
     <h3>All movies</h3>
     <movie v-for="movie in movies" :key="movie.id" :movie="movie"></movie>
   </div>
+  </main>
+
 </template>
 
 <script setup>

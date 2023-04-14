@@ -4,6 +4,13 @@
         <div>
             <div class="movie-name">{{ movie.original_title }} ( {{ movie.release_date }})</div>
             <span class="movie-overview">{{ movie.overview }}</span>
+            <div class="movie-buttons">
+                <v-btn class="btn movie-buttons-watched">
+                    <span v-if="movie.isWatched">Watched</span>
+                    <span v-else>Unwatched</span>
+                </v-btn>
+                <v-btn class="btn movie-buttons-delete">Delete</v-btn>
+            </div>
         </div>
     </div>
 </template>
