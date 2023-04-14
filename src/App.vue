@@ -2,10 +2,21 @@
   <header class="header">
     <img src="./assets/logo.svg" alt="logo" class="header-logo">
     <h1>My favorite films</h1>
-  </header>  
+  </header>
+  
+  <div class="movies">
+    <h3>All movies</h3>
+    <movie v-for="movie in movies" :key="movie.id" :movie="movie"></movie>
+  </div>
 </template>
 
 <script setup>
+  import Movie from './components/Movie.vue';
+  import { useMovieStore } from './stores/movieStore';
+  import { storeToRefs } from 'pinia';
+
+  const store = useMovieStore();
+  const {movies} = storeToRefs(store);
 
 </script>
 

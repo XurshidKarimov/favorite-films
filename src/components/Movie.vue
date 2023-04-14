@@ -1,11 +1,16 @@
 <template>
-    <div>
-        
+    <div class="movie">
+        <img :src="`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`" :alt="movie.original_title" class="movie-img">
+        <div>
+            <div class="movie-name">{{ movie.original_title }} ( {{ movie.release_date }})</div>
+            <span class="movie-overview">{{ movie.overview }}</span>
+        </div>
     </div>
 </template>
 
 <script setup>
-    
+    const props = defineProps(['movie']);
+
 </script>
 
 
