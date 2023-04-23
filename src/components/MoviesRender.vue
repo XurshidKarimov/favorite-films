@@ -1,5 +1,10 @@
 <template>
     <div class="movies">
+        <h3>Watched movies</h3>
+        <movie v-for="movie in store.watchedMovies" :key="movie.id" :movie="movie"></movie>
+    </div>
+
+    <div class="movies">
         <h3>All movies</h3>
         <movie v-for="movie in movies" :key="movie.id" :movie="movie"></movie>
     </div>
@@ -12,7 +17,6 @@ import { storeToRefs } from 'pinia';
 
 const store = useMovieStore();
 const { movies } = storeToRefs(store);
-
 
 </script>
 

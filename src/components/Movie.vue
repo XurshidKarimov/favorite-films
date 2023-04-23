@@ -5,7 +5,7 @@
             <div class="movie-name">{{ movie.original_title }} ({{ movie.release_date }})</div>
             <span class="movie-overview">{{ movie.overview }}</span>
             <div class="movie-buttons">
-                <v-btn class="btn movie-buttons-watched">
+                <v-btn class="btn movie-buttons-watched" @click="store.watchedChange(movie.id)">
                     <span v-if="movie.isWatched">Watched</span>
                     <span v-else>Unwatched</span>
                 </v-btn>
@@ -16,7 +16,12 @@
 </template>
 
 <script setup>
+    import { useMovieStore } from '../stores/movieStore';
     const props = defineProps(['movie']);
+
+    const store = useMovieStore();
+
+    
 
 </script>
 

@@ -27,9 +27,18 @@ export const useMovieStore = defineStore("movieStore", {
     actions: {
         switchTab(val){
             this.activeTab = val;
-        }
+        },
+        watchedChange(movieID){
+            this.movies.forEach(movie => {
+              if(movieID === movie.id){
+                movie.isWatched = !movie.isWatched;
+              }
+            })
+        },
     },
     getters: {
-        
+        watchedMovies(){
+          return this.movies.filter(movie => movie.isWatched);
+        }
     }
 })
