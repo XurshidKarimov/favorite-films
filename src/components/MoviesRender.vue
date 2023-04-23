@@ -1,6 +1,6 @@
 <template>
     <div class="movies">
-        <h3>Watched movies</h3>
+        <h3 v-if="store.watchedMovies.length">Watched movies</h3>
         <movie v-for="movie in store.watchedMovies" :key="movie.id" :movie="movie"></movie>
     </div>
 
