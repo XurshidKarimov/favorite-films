@@ -4,12 +4,17 @@
         <div>
             <div class="movie-name">{{ movie.original_title }} ({{ movie.release_date }})</div>
             <span class="movie-overview">{{ movie.overview }}</span>
-            <div class="movie-buttons">
+            <div class="movie-buttons" v-if="!isSearch">
                 <v-btn class="btn movie-buttons-watched" @click="store.watchedChange(movie.id)">
                     <span v-if="movie.isWatched">Watched</span>
                     <span v-else>Unwatched</span>
                 </v-btn>
                 <v-btn class="btn movie-buttons-delete" @click="store.deleteMovie(movie.id)">Delete</v-btn>
+            </div>
+            <div class="movie-buttons" v-else>
+                <v-btn class="btn movie-buttons-watched" @click="store.watchedChange(movie.id)">
+                    Add
+                </v-btn>
             </div>
         </div>
     </div>
@@ -17,7 +22,7 @@
 
 <script setup>
     import { useMovieStore } from '../stores/movieStore';
-    const props = defineProps(['movie']);
+    const props = defineProps(['movie', 'isSearch']);
 
     const store = useMovieStore();
 
